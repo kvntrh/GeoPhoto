@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GeoPhoto</string>
+
+    <string name="gallery">Gallery</string>
+    <string name="photo">Photo</string>
+    <string name="map">Map</string>
+</resources>

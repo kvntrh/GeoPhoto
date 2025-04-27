@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GeoPhoto</string>
+
+    <string name="gallery">Gallerie</string>
+    <string name="photo">Photo</string>
+    <string name="map">Carte</string>
+</resources>
