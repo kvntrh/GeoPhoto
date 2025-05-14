@@ -51,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
         findViewById(R.id.btn_map).setOnClickListener(v -> {
-            // Afficher la carte
+            Intent intent = new Intent(MainActivity.this, MapActivity.class);
+            startActivity(intent);
         });
 
     }
