@@ -39,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        btnPhoto = findViewById(R.id.btn_photo);
-        imgAffichePhoto = findViewById(R.id.imgAffichePhoto);
 
         findViewById(R.id.btn_gallery).setOnClickListener(v -> {
             // Ouvrir la galerie
@@ -48,38 +46,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
         findViewById(R.id.btn_photo).setOnClickListener(v -> {
-            dispatchTakePictureIntent();
+            // Ouvrir la page de prise de photo
+            Intent intent = new Intent(MainActivity.this, PhotoActivity.class);
+            startActivity(intent);
         });
         findViewById(R.id.btn_map).setOnClickListener(v -> {
             // Afficher la carte
         });
 
-    }
-
-    private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // Vérifie qu’il existe bien une app pour gérer cet intent
-        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-        String time = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        File photoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        try {
-            File photoFile = File.createTempFile("photo" + time, ".jpg", photoDir);
-            photoPath = photoFile.getAbsolutePath();
-            Uri photoUri = FileProvider.getUriForFile(MainActivity.this,
-                    MainActivity.this.getApplicationContext().getPackageName() + ".provider", photoFile);
-            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestcode, int resultCode, Intent data) {
-        super.onActivityResult(requestcode, resultCode, data);
-        if (requestcode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bitmap image = BitmapFactory.decodeFile(photoPath);
-            imgAffichePhoto.setImageBitmap(image);
-        }
     }
 }
