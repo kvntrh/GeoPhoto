@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private ImageView imgAffichePhoto;
     private Button btnPhoto;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.btn_gallery).setOnClickListener(v -> {
             // Ouvrir la galerie
+            Intent intent = new Intent(MainActivity.this, GalleryActivity.class);
+            startActivity(intent);
         });
         findViewById(R.id.btn_photo).setOnClickListener(v -> {
             dispatchTakePictureIntent();
@@ -52,16 +55,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Vérifie qu’il existe bien une app pour gérer cet intent
         startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         String time = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         File photoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        try{
-            File photoFile = File.createTempFile("photo"+time, ".jpg", photoDir);
+        try {
+            File photoFile = File.createTempFile("photo" + time, ".jpg", photoDir);
             photoPath = photoFile.getAbsolutePath();
-            Uri photoUri = FileProvider.getUriForFile(MainActivity.this, MainActivity.this.getApplicationContext().getPackageName()+".provider", photoFile);
+            Uri photoUri = FileProvider.getUriForFile(MainActivity.this,
+                    MainActivity.this.getApplicationContext().getPackageName() + ".provider", photoFile);
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         } catch (IOException e) {
@@ -70,9 +75,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestcode, int resultCode, Intent data){
+    protected void onActivityResult(int requestcode, int resultCode, Intent data) {
         super.onActivityResult(requestcode, resultCode, data);
-        if(requestcode==REQUEST_IMAGE_CAPTURE && resultCode==RESULT_OK){
+        if (requestcode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bitmap image = BitmapFactory.decodeFile(photoPath);
             imgAffichePhoto.setImageBitmap(image);
         }
