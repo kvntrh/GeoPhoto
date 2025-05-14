@@ -1,4 +1,4 @@
-package com.example.geophoto;
+package com.example.geophoto.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
 public class ImageDbHelper extends SQLiteOpenHelper {
+    // If you change the database schema, you must increment the database version.
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "ImageGallery.db";
 

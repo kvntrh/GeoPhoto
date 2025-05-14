@@ -1,4 +1,4 @@
-package com.example.geophoto;
+package com.example.geophoto.database;
 
 import androidx.appcompat.app.AppCompatActivity;
 
