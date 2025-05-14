@@ -48,7 +48,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
         findViewById(R.id.btn_photo).setOnClickListener(v -> {
-            dispatchTakePictureIntent();
+            // Ouvrir la page de prise de photo
+            Intent intent = new Intent(MainActivity.this, PhotoActivity.class);
+            startActivity(intent);
         });
         findViewById(R.id.btn_map).setOnClickListener(v -> {
             // Afficher la carte
