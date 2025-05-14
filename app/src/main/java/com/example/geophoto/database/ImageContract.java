@@ -1,4 +1,4 @@
-package com.example.geophoto;
+package com.example.geophoto.database;
 
 import android.provider.BaseColumns;
 
