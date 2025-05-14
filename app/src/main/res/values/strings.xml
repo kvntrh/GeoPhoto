@@ -4,4 +4,6 @@
     <string name="gallery">Gallery</string>
     <string name="photo">Photo</string>
     <string name="map">Map</string>
+
+    <string name="enregistrer">Save</string>
 </resources>

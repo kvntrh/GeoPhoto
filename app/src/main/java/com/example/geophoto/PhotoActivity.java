@@ -1,7 +1,5 @@
 package com.example.geophoto;
 
-import javax.print.attribute.standard.Media;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -58,7 +56,7 @@ public class PhotoActivity extends AppCompatActivity {
     }
 
     private void createOnClicBtnEnreg() {
-        btnEnreg.setOnClickListener(new Button.setOnClickListener() {
+        btnEnreg.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // enregistrer l'image dans la galerie
@@ -68,7 +66,7 @@ public class PhotoActivity extends AppCompatActivity {
     }
 
     private void createOnClicBtnPrendrePhoto() {
-        btnPrendrePhoto.setOnClickListener(new Button.setOnClickListener() {
+        btnPrendrePhoto.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
                 prendreUnePhoto();
