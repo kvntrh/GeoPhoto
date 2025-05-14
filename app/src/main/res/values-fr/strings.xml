@@ -7,4 +7,7 @@
     <string name="map">Carte</string>
 
     <string name="enregistrer">Enregistrer</string>
+
+    <string name="longitude">Longitude</string>
+    <string name="latitude">Latitude</string>
 </resources>
