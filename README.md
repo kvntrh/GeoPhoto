@@ -17,7 +17,7 @@
 
 ## Features
 
-- **Find Photo From Gallery**
+- **Bonus Feature : Find Photo From Gallery**
 
   
 
@@ -36,5 +36,14 @@ https://github.com/user-attachments/assets/8f1cb838-7a2c-45cb-932c-fba2f127baf1
 
 
 https://github.com/user-attachments/assets/f8151e6e-093b-4f1f-b20d-1c97501ed92c
+
+
+- **Bonus Feature : ByteArray in Base64 and vice versa**
+
+
+
+
+https://github.com/user-attachments/assets/b1beaf3b-7aed-4f10-b130-1e71bbcb5217
+
 
 
