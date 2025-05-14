@@ -2,6 +2,7 @@ package com.example.geophoto;
 
 import android.Manifest;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -18,6 +19,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -44,6 +48,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private TextView latitude, longitude;
 
     private boolean positionInitialeDefinie = false;
+    private LocationCallback locationCallback;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,18 +62,36 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             return insets;
         });
 
+        findViewById(R.id.btn_gallery).setOnClickListener(v -> {
+            // Ouvrir la galerie
+            Intent intent = new Intent(MapActivity.this, GalleryActivity.class);
+            startActivity(intent);
+        });
+        findViewById(R.id.btn_photo).setOnClickListener(v -> {
+            // Ouvrir la page de prise de photo
+            Intent intent = new Intent(MapActivity.this, PhotoActivity.class);
+            startActivity(intent);
+        });
+        findViewById(R.id.btn_map).setOnClickListener(v -> {
+            Intent intent = new Intent(MapActivity.this, MapActivity.class);
+            startActivity(intent);
+        });
+
+
         latitude = findViewById(R.id.latitude);
         longitude = findViewById(R.id.longitude);
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         getLastLocation();
+
+
     }
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.map = googleMap;
 
-        LatLng p = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+        LatLng p = new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude());
 
         // Utiliser Geocoder pour obtenir l'adresse
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
@@ -83,6 +107,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             e.printStackTrace();
         }
 
+
         map.addMarker(new MarkerOptions().position(p).title(adresse));
 
         if (!positionInitialeDefinie) {
@@ -91,41 +116,35 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
     }
 
-    private void getLastLocation() {
+    private void getLastLocation(){
 
-        if (ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION }, FINE_PERMISSION_CODE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, FINE_PERMISSION_CODE);
             return;
         }
         Task<Location> task = fusedLocationClient.getLastLocation();
         task.addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location location) {
-                if (location != null) {
+                if (location != null){
                     currentLocation = location;
 
                     latitude.setText(String.valueOf(location.getLatitude()));
                     longitude.setText(String.valueOf(location.getLongitude()));
 
-                    SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                            .findFragmentById(R.id.map);
+                    SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
                     if (mapFragment != null)
-                        mapFragment.getMapAsync(MapActivity.this);
+                        mapFragment.getMapAsync( MapActivity.this);
                 }
             }
         });
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults,
-                                           int deviceId) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults, int deviceId) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults, deviceId);
-        if (requestCode == FINE_PERMISSION_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (requestCode == FINE_PERMISSION_CODE){
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 getLastLocation();
             } else {
                 Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
