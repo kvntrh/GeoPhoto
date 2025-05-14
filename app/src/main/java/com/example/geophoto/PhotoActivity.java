@@ -68,7 +68,7 @@ public class PhotoActivity extends AppCompatActivity {
         imgAffichagePhoto = (ImageView) findViewById(R.id.imgAffichagePhoto);
         btnEnreg = (Button) findViewById(R.id.btnEnreg);
         btnBitmapToString = (Button) findViewById(R.id.btnBitmapToString);
-        txtBitmap = (TextView) findViewById(R.id.txtBitmap);
+        txtBitmap = (TextView) findViewById(R.id.StringBase64);
         btnStringToBitmap = (Button) findViewById(R.id.btnStringToBitmap);
         imgAffichageFromString = (ImageView) findViewById(R.id.imgAffichageFromString);
         
