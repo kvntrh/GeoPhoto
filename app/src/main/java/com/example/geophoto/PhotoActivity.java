@@ -11,6 +11,7 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,7 +46,7 @@ public class PhotoActivity extends AppCompatActivity {
      * PARTIE 2
      */
     private Button btnBitmapToString;
-    private String txtBitmap;
+    private TextView txtBitmap;
     private Button btnStringToBitmap;
     private ImageView imgAffichageFromString;
 
@@ -67,6 +68,7 @@ public class PhotoActivity extends AppCompatActivity {
         imgAffichagePhoto = (ImageView) findViewById(R.id.imgAffichagePhoto);
         btnEnreg = (Button) findViewById(R.id.btnEnreg);
         btnBitmapToString = (Button) findViewById(R.id.btnBitmapToString);
+        txtBitmap = (TextView) findViewById(R.id.txtBitmap);
         btnStringToBitmap = (Button) findViewById(R.id.btnStringToBitmap);
         imgAffichageFromString = (ImageView) findViewById(R.id.imgAffichageFromString);
         
@@ -97,22 +99,26 @@ public class PhotoActivity extends AppCompatActivity {
 
     /**
      * PARTIE 2
+     * Convertir une image en chaîne de caractères et vice versa
      */
     private void createOnClicBtnBitmapToString() {
         btnBitmapToString.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txtBitmap = bitmapToString(image);
+                if (image != null) {
+                    Bitmap bitmap = BitmapFactory.decodeFile(photoPath);
+                    String imageString = bitmapToString(bitmap);
+                    txtBitmap.setText(imageString);
+                }
             }
         });
     }
-
+    
     private void createOnClicBtnStringToBitmap() {
         btnStringToBitmap.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bitmap bitmap = stringToBitmap(txtBitmap);
-                imgAffichageFromString.setImageBitmap(bitmap);
+                imgAffichageFromString.setImageBitmap(stringToBitmap(txtBitmap.getText().toString()));
             }
         });
     }
@@ -136,6 +142,22 @@ public class PhotoActivity extends AppCompatActivity {
     }
     
     /**
+     * PARTIE 2
+     * Convertir une image en chaîne de caractères et vice versa
+     */
+    private String bitmapToString(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
+    }
+    
+    private Bitmap stringToBitmap(String encodedString) {
+        byte[] decodedString = Base64.decode(encodedString, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+    }
+    
+    /**
      * sauvegarder image dans une base de données sqlite
      */
     private void saveImage() {
@@ -145,24 +167,6 @@ public class PhotoActivity extends AppCompatActivity {
         // dbHelper.insertImage(imageString);
     }
 
-    /**
-     * PARTIE 2
-     */
-    private String bitmapToString(Bitmap bitmap) {
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] byteArray = stream.toByteArray();
-        return Base64.encodeToString(byteArray, Base64.DEFAULT);
-    }
-
-    private Bitmap stringToBitmap(String encodedString) {
-        byte[] decodedString = Base64.decode(encodedString, Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-    }
-
-    /**
-     * PARTIE 1
-     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
