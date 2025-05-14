@@ -17,7 +17,24 @@
 
 ## Features
 
-- **Take Photo:** Captures an image using the device's built-in camera application.
-- **Display Photo:** Shows the captured photo in an `ImageView` within the `PhotoActivity`.
-- **Save Photo:** Saves the displayed photo to the device's public image gallery (e.g., Pictures or DCIM directory) using `MediaStore`.
-- **FileProvider:** Uses `FileProvider` to securely share a temporary image file URI with the camera application, adhering to Android's best practices for file sharing.
+- **Find Photo From Gallery**
+
+  
+
+
+
+https://github.com/user-attachments/assets/8f1cb838-7a2c-45cb-932c-fba2f127baf1
+
+
+
+
+
+- **Take Photo** 
+- **Display Photo** 
+- **Save Photo**
+
+
+
+https://github.com/user-attachments/assets/f8151e6e-093b-4f1f-b20d-1c97501ed92c
+
+
