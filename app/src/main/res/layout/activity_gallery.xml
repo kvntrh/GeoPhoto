@@ -7,51 +7,23 @@
     android:layout_height="match_parent"
     tools:context=".GalleryActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <LinearLayout
         android:layout_width="409dp"
         android:layout_height="729dp"
+        android:orientation="vertical"
         tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp" />
-
-    <LinearLayout
-        android:id="@+id/bottom_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:background="?attr/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        tools:layout_editor_absoluteY="1dp">
 
         <Button
-            android:id="@+id/btn_gallery"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/gallery" />
+            android:id="@+id/btnFindPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rechercher une photo" />
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="#FFFFFF" />
-
-        <Button
-            android:id="@+id/btn_photo"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/photo" />
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="#FFFFFF" />
-
-        <Button
-            android:id="@+id/btn_map"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/map" />
+        <ImageView
+            android:id="@+id/imgPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:srcCompat="@tools:sample/avatars" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
