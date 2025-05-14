@@ -36,4 +36,47 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnEnreg"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/btnBitmapToString"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="BitmapToString"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgAffichagePhoto" />
+
+    <TextView
+        android:id="@+id/txtBitmap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:maxLines="10"
+        android:text="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnBitmapToString" />
+
+    <Button
+        android:id="@+id/btnStringToBitmap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="StringToBitmap"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtBitmap" />
+
+    <ImageView
+        android:id="@+id/imgAffichageFromString"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnStringToBitmap"
+        tools:srcCompat="@tools:sample/avatars" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
