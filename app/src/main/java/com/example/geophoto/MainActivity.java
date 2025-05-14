@@ -39,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        btnPhoto = findViewById(R.id.btn_photo);
-        imgAffichePhoto = findViewById(R.id.imgAffichePhoto);
 
         findViewById(R.id.btn_gallery).setOnClickListener(v -> {
             // Ouvrir la galerie
