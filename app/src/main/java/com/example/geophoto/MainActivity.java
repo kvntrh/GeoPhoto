@@ -57,31 +57,4 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-    private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // Vérifie qu’il existe bien une app pour gérer cet intent
-        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-        String time = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        File photoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        try {
-            File photoFile = File.createTempFile("photo" + time, ".jpg", photoDir);
-            photoPath = photoFile.getAbsolutePath();
-            Uri photoUri = FileProvider.getUriForFile(MainActivity.this,
-                    MainActivity.this.getApplicationContext().getPackageName() + ".provider", photoFile);
-            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestcode, int resultCode, Intent data) {
-        super.onActivityResult(requestcode, resultCode, data);
-        if (requestcode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bitmap image = BitmapFactory.decodeFile(photoPath);
-            imgAffichePhoto.setImageBitmap(image);
-        }
-    }
 }
