@@ -34,10 +34,12 @@ public class GalleryActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        initActivity();
+        createOnClickPhotoButton();
     }
 
     private void initActivity() {
-        ImageView imgPhoto = (ImageView) findViewById(R.id.imgPhoto);
+        imgPhoto = (ImageView) findViewById(R.id.imgPhoto);
         btnFindPhoto = (Button) findViewById(R.id.btnFindPhoto);
     }
 
