@@ -1,5 +1,6 @@
 package com.example.geophoto;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.btn_gallery).setOnClickListener(v -> {
             // Ouvrir la galerie
+            Intent intent = new Intent(MainActivity.this, GalleryActivity.class);
+            startActivity(intent);
         });
         findViewById(R.id.btn_photo).setOnClickListener(v -> {
             // Prendre une photo
