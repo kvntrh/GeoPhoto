@@ -25,7 +25,7 @@ import java.util.Date;
 
 public class PhotoActivity extends AppCompatActivity {
 
-    private static final int RETOUR_PRENDRE_PHOTO = 1;
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
 
     private Button btnPrendrePhoto;
     private ImageView imgAffichagePhoto;
@@ -47,9 +47,9 @@ public class PhotoActivity extends AppCompatActivity {
     }
 
     private void initActivity() {
-        btnPrendrePhoto = findViewById(R.id.btnPrendrePhoto);
-        imgAffichagePhoto = findViewById(R.id.imgAffichagePhoto);
-        btnEnreg = findViewById(R.id.btnEnreg);
+        btnPrendrePhoto = (Button) findViewById(R.id.btnPrendrePhoto);
+        imgAffichagePhoto = (ImageView) findViewById(R.id.imgAffichagePhoto);
+        btnEnreg = (Button) findViewById(R.id.btnEnreg);
 
         createOnClicBtnPrendrePhoto();
         createOnClicBtnEnreg();
@@ -75,31 +75,27 @@ public class PhotoActivity extends AppCompatActivity {
     }
 
     private void prendreUnePhoto() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            // Créer un fichier pour stocker l'image
-            String time = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-            File photoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-            try {
-                File photoFile = File.createTempFile(
-                        "photo" + time, ".jpg", photoDir);
-                // Enregistrer le chemin de l'image
-                photoPath = photoFile.getAbsolutePath();
-                Uri photoURI = FileProvider.getUriForFile(this,
-                        "com.example.geophoto.fileprovider",
-                        photoFile);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                startActivityForResult(intent, RETOUR_PRENDRE_PHOTO);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Vérifie qu’il existe bien une app pour gérer cet intent
+        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        String time = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        File photoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        try {
+            File photoFile = File.createTempFile("photo" + time, ".jpg", photoDir);
+            photoPath = photoFile.getAbsolutePath();
+            Uri photoUri = FileProvider.getUriForFile(PhotoActivity.this,
+                    PhotoActivity.this.getApplicationContext().getPackageName() + ".provider", photoFile);
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RETOUR_PRENDRE_PHOTO && resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             // Afficher l'image dans l'ImageView
             image = BitmapFactory.decodeFile(photoPath);
             imgAffichagePhoto.setImageBitmap(image);
