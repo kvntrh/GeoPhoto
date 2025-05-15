@@ -75,5 +75,10 @@ https://github.com/user-attachments/assets/39573e2b-5d8e-4e48-9098-99e2d447201f
 
 
 
+- **Feature : language changes according to Region Preferences fr eng**
+
+
+
+https://github.com/user-attachments/assets/62f88db7-ad1c-4f93-b1b1-587a8aa9a8b4
 
 
