@@ -1,5 +1,7 @@
 package com.example.geophoto;
 
+import static java.lang.Class.forName;
+
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -55,9 +58,17 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     // WARNING: Hardcoding credentials is a security risk.
     private static final String DB_URL = "jdbc:mysql://10.0.2.2:3306/MyDB"; // 10.0.2.2 is for Android Emulator to
                                                                             // connect to host's localhost
-    private static final String DB_USER = "aaa";
-    private static final String DB_PASSWORD = "aaa";
+    private static final String DB_USER = "root";
+    private static final String DB_PASSWORD = "test";
     private static final String TAG_DB = "DatabaseAccess";
+
+    protected static String db = "sampledb";
+    protected static String user = "root";
+    protected static String password = "test";
+    protected static String host = "10.0.2.2";
+    protected static String port = "3306";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,14 +102,27 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             displayLastSavedLocationFromDB();
         });
 
-        // Explicitly load the MySQL driver (optional for newer JDBC drivers, but good
-        // practice for older ones)
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            Log.e(TAG_DB, "MySQL JDBC Driver not found.", e);
-            Toast.makeText(this, "MySQL Driver Error. Check logs.", Toast.LENGTH_LONG).show();
-        }
+    }
+
+    public Connection CONN() {
+        Connection conn = null;
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                String connectionString = "jdbc:mysql://" + host + ":" + port + "/" + db;
+                conn = DriverManager.getConnection(connectionString, user, password);
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                String error = e.getMessage();
+                Log.e("JDBC_ERROR", "Erreur de connexion", e);
+
+                runOnUiThread(() ->
+                        Toast.makeText(MapActivity.this, "Connection failed: " + error, Toast.LENGTH_LONG).show()
+                );
+            }
+
+        return conn;
     }
 
     @Override

@@ -2,8 +2,10 @@ package com.example.geophoto;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,12 +13,23 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class MainActivity extends AppCompatActivity {
 
     private String photoPath = null;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private ImageView imgAffichePhoto;
     private Button btnPhoto;
+    MapActivity mapActivity;
+    Connection con;
+    ResultSet rs;
+    String name, str;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        mapActivity = new MapActivity();
+        connect();
 
         findViewById(R.id.btn_gallery).setOnClickListener(v -> {
             // Ouvrir la galerie
@@ -45,4 +60,29 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    public void connect(){
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        executorService.execute(() -> {
+            try {
+                con = mapActivity.CONN();
+                if (con == null) {
+                    str = "Connection failed";
+                } else {
+                    str = "Connection successful";
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
+            runOnUiThread(() -> {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Toast.makeText(MainActivity.this, str, Toast.LENGTH_SHORT).show();
+            });
+            });
+        }
 }
