@@ -32,7 +32,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Save Current Location"
+            android:text="@string/save_current_location"
             android:layout_marginEnd="4dp"/>
 
         <Button
@@ -40,7 +40,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Display Last Saved"
+            android:text="@string/display_last_saved"
             android:layout_marginStart="4dp"/>
     </LinearLayout>
 
