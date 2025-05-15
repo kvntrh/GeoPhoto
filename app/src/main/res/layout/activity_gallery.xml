@@ -31,7 +31,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:text="Rechercher une photo" />
+                    android:text="@string/rechercher_une_photo" />
 
                 <ImageView
                     android:id="@+id/imgPhoto"
@@ -46,7 +46,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:hint="Ecrire le Titre"
+                    android:hint="@string/hint_titre"
                     android:inputType="text" />
 
                 <Button
@@ -54,19 +54,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:text="Sauvegarder dans sqlite" />
+                    android:text="@string/sauvegarder_dans_sqlite" />
 
                 <Button
                     android:id="@+id/btnLoadPhotosFromSqlite"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="btnLoadPhotosFromSqlite" />
+                    android:text="@string/charger_photos_depuis_sqlite" />
 
                 <TextView
                     android:id="@+id/textViewLoadedData"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Les données en chargement" />
+                    android:text="@string/donnees_en_chargement" />
             </LinearLayout>
         </ScrollView>
 
