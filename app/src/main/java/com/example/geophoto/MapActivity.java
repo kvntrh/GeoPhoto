@@ -46,18 +46,15 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     private GoogleMap map;
     private final int FINE_PERMISSION_CODE = 1;
-    Location currentLocation; // This will hold the current fetched location
+    Location currentLocation;
 
     private FusedLocationProviderClient fusedLocationClient;
-    private TextView latitudeTextView, longitudeTextView; // Renamed for clarity
+    private TextView latitudeTextView, longitudeTextView;
     private Button btnSaveLocation, btnDisplayLastLocation;
 
     private boolean positionInitialeDefinie = false;
 
-    // --- Database Configuration ---
-    // WARNING: Hardcoding credentials is a security risk.
-    private static final String DB_URL = "jdbc:mysql://10.0.2.2:3306/sampledb"; // 10.0.2.2 is for Android Emulator to
-                                                                            // connect to host's localhost
+    private static final String DB_URL = "jdbc:mysql://10.0.2.2:3306/sampledb";
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "test";
     private static final String TAG_DB = "DatabaseAccess";
@@ -67,8 +64,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     protected static String password = "test";
     protected static String host = "10.0.2.2";
     protected static String port = "3306";
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,14 +82,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         btnDisplayLastLocation = findViewById(R.id.btnDisplayLastLocation);
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        getLastLocation(); // Get initial location
+        getLastLocation();
 
         btnSaveLocation.setOnClickListener(v -> {
             if (currentLocation != null) {
                 saveLocationToDB(currentLocation.getLatitude(), currentLocation.getLongitude());
             } else {
                 Toast.makeText(MapActivity.this, "Current location not available to save.", Toast.LENGTH_SHORT).show();
-                getLastLocation(); // Try to fetch it again
+                getLastLocation();
             }
         });
 
@@ -106,21 +101,19 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     public Connection CONN() {
         Connection conn = null;
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-                String connectionString = "jdbc:mysql://" + host + ":" + port + "/" + db;
-                conn = DriverManager.getConnection(connectionString, user, password);
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            String connectionString = "jdbc:mysql://" + host + ":" + port + "/" + db;
+            conn = DriverManager.getConnection(connectionString, user, password);
 
+        } catch (Exception e) {
+            e.printStackTrace();
+            String error = e.getMessage();
+            Log.e("JDBC_ERROR", "Erreur de connexion", e);
 
-            } catch (Exception e) {
-                e.printStackTrace();
-                String error = e.getMessage();
-                Log.e("JDBC_ERROR", "Erreur de connexion", e);
-
-                runOnUiThread(() ->
-                        Toast.makeText(MapActivity.this, "Connection failed: " + error, Toast.LENGTH_LONG).show()
-                );
-            }
+            runOnUiThread(
+                    () -> Toast.makeText(MapActivity.this, "Connection failed: " + error, Toast.LENGTH_LONG).show());
+        }
 
         return conn;
     }
@@ -131,7 +124,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         if (currentLocation == null) {
             Log.w("MapReady", "currentLocation is null when map is ready. Attempting to fetch again.");
-            getLastLocation(); // Try to fetch if it was null
+            getLastLocation();
             return;
         }
 
@@ -149,14 +142,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             Log.e("Geocoder", "Error getting address", e);
         }
 
-        map.clear(); // Clear previous markers
+        map.clear();
         map.addMarker(new MarkerOptions().position(p).title(adresse));
 
         if (!positionInitialeDefinie) {
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(p, 17.f)); // Zoomed in a bit more
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(p, 17.f));
             positionInitialeDefinie = true;
         } else {
-            map.animateCamera(CameraUpdateFactory.newLatLng(p)); // Animate to new location if already initialized
+            map.animateCamera(CameraUpdateFactory.newLatLng(p));
         }
     }
 
@@ -175,7 +168,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             @Override
             public void onSuccess(Location location) {
                 if (location != null) {
-                    currentLocation = location; // Update the class member
+                    currentLocation = location;
                     Log.d("LocationUpdate",
                             "Fetched Location: " + location.getLatitude() + ", " + location.getLongitude());
 
@@ -259,13 +252,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
                 Log.d(TAG_DB, "Connected!");
 
-                // Assuming 'id' or a timestamp column can be used for ordering to get the
-                // "last"
-                // If you have an auto-increment ID:
                 String sql = "SELECT latitude, longitude FROM location";
-                // If you use a timestamp column e.g., 'saved_at':
-                // String sql = "SELECT latitude, longitude FROM MyTable ORDER BY saved_at DESC
-                // LIMIT 1";
 
                 statement = connection.prepareStatement(sql);
                 resultSet = statement.executeQuery();
@@ -279,7 +266,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         longitudeTextView.setText(String.format(Locale.US, "DB Lng: %.6f", lon));
                         Toast.makeText(MapActivity.this, "Last saved: " + lat + ", " + lon, Toast.LENGTH_LONG).show();
 
-                        // Optionally, update map to this location
+                        // focus back on last location
                         if (map != null) {
                             LatLng dbLocation = new LatLng(lat, lon);
                             map.animateCamera(CameraUpdateFactory.newLatLngZoom(dbLocation, 17.f));
@@ -319,7 +306,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
             @NonNull int[] grantResults) {
-        // Corrected signature: removed 'deviceId'
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == FINE_PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
