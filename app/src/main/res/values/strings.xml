@@ -25,4 +25,6 @@
     <string name="enregistrer_lowercase">save</string>
     <string name="bitmap_to_string">Bitmap To String</string>
     <string name="string_to_bitmap">String To Bitmap</string>
+
+    <string name="hint_titre">Write the title</string>
 </resources>
