@@ -9,4 +9,20 @@
 
     <string name="longitude">Longitude</string>
     <string name="latitude">Latitude</string>
+
+    <string name="rechercher_une_photo">Search for a photo</string>
+    <string name="sauvegarder_dans_sqlite">Save to SQLite</string>
+    <string name="charger_photos_depuis_sqlite">Load photos from SQLite</string>
+    <string name="donnees_en_chargement">Loading data</string>
+
+    <string name="bonjour_et_bienvenue">Hello and welcome!</string>
+    <string name="cliquez_sur_la_barre_de_navigation">Click on the navigation bar to access different sections.</string>
+
+    <string name="save_current_location">Save Current Location</string>
+    <string name="display_last_saved">Display Last Saved</string>
+
+    <string name="prendre_une_photo">Take a photo</string>
+    <string name="enregistrer_lowercase">save</string>
+    <string name="bitmap_to_string">Bitmap To String</string>
+    <string name="string_to_bitmap">String To Bitmap</string>
 </resources>
