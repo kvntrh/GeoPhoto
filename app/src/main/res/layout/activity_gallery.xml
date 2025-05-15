@@ -17,42 +17,6 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <Button
-            android:id="@+id/btnFindPhoto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="Rechercher une photo" />
-
-        <ImageView
-            android:id="@+id/imgPhoto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:contentDescription="@string/gallery"
-            tools:srcCompat="@tools:sample/avatars" />
-
-        <EditText
-            android:id="@+id/inputTexteTitre"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:hint="Ecrire le Titre"
-            android:inputType="text" />
-
-        <Button
-            android:id="@+id/btnEnregistrerPhotoDansSqlite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="Sauvegarder dans sqlite" />
-
-        <Button
-            android:id="@+id/btnLoadPhotosFromSqlite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="btnLoadPhotosFromSqlite" />
-
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -61,6 +25,42 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btnFindPhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="Rechercher une photo" />
+
+                <ImageView
+                    android:id="@+id/imgPhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:contentDescription="@string/gallery"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <EditText
+                    android:id="@+id/inputTexteTitre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:hint="Ecrire le Titre"
+                    android:inputType="text" />
+
+                <Button
+                    android:id="@+id/btnEnregistrerPhotoDansSqlite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="Sauvegarder dans sqlite" />
+
+                <Button
+                    android:id="@+id/btnLoadPhotosFromSqlite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="btnLoadPhotosFromSqlite" />
 
                 <TextView
                     android:id="@+id/textViewLoadedData"
