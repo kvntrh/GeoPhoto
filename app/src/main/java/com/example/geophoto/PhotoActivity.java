@@ -71,7 +71,7 @@ public class PhotoActivity extends AppCompatActivity {
         txtBitmap = (TextView) findViewById(R.id.StringBase64);
         btnStringToBitmap = (Button) findViewById(R.id.btnStringToBitmap);
         imgAffichageFromString = (ImageView) findViewById(R.id.imgAffichageFromString);
-        
+
         createOnClicBtnPrendrePhoto();
         createOnClicBtnEnreg();
         createOnClicBtnBitmapToString();
@@ -113,7 +113,7 @@ public class PhotoActivity extends AppCompatActivity {
             }
         });
     }
-    
+
     private void createOnClicBtnStringToBitmap() {
         btnStringToBitmap.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -122,7 +122,7 @@ public class PhotoActivity extends AppCompatActivity {
             }
         });
     }
-    
+
     private void prendreUnePhoto() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Vérifie qu’il existe bien une app pour gérer cet intent
@@ -133,14 +133,14 @@ public class PhotoActivity extends AppCompatActivity {
             File photoFile = File.createTempFile("photo" + time, ".jpg", photoDir);
             photoPath = photoFile.getAbsolutePath();
             Uri photoUri = FileProvider.getUriForFile(PhotoActivity.this,
-            PhotoActivity.this.getApplicationContext().getPackageName() + ".provider", photoFile);
+                    PhotoActivity.this.getApplicationContext().getPackageName() + ".provider", photoFile);
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
+
     /**
      * PARTIE 2
      * Convertir une image en chaîne de caractères et vice versa
@@ -151,12 +151,12 @@ public class PhotoActivity extends AppCompatActivity {
         byte[] byteArray = stream.toByteArray();
         return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
-    
+
     private Bitmap stringToBitmap(String encodedString) {
         byte[] decodedString = Base64.decode(encodedString, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
-    
+
     /**
      * sauvegarder image dans une base de données sqlite
      */
