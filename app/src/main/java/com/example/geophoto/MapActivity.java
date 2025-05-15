@@ -110,20 +110,16 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 Class.forName("com.mysql.jdbc.Driver");
                 String connectionString = "jdbc:mysql://" + host + ":" + port + "/" + db;
                 conn = DriverManager.getConnection(connectionString, user, password);
-
-
             } catch (Exception e) {
                 e.printStackTrace();
-                String error = e.getMessage();
                 Log.e("JDBC_ERROR", "Erreur de connexion", e);
 
-                runOnUiThread(() ->
-                        Toast.makeText(MapActivity.this, "Connection failed: " + error, Toast.LENGTH_LONG).show()
-                );
             }
 
         return conn;
     }
+
+
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
