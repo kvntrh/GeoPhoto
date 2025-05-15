@@ -157,16 +157,6 @@ public class PhotoActivity extends AppCompatActivity {
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
 
-    /**
-     * sauvegarder image dans une base de données sqlite
-     */
-    private void saveImage() {
-        // Convertir l'image en chaîne de caractères
-        String imageString = bitmapToString(image);
-        // Enregistrer l'image dans la base de données
-        // dbHelper.insertImage(imageString);
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
