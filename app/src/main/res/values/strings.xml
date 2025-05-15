@@ -6,4 +6,7 @@
     <string name="map">Map</string>
 
     <string name="enregistrer">Save</string>
+
+    <string name="longitude">Longitude</string>
+    <string name="latitude">Latitude</string>
 </resources>
