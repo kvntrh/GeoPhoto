@@ -55,7 +55,7 @@ https://github.com/user-attachments/assets/b1beaf3b-7aed-4f10-b130-1e71bbcb5217
 https://github.com/user-attachments/assets/44699216-bd09-4174-ad24-de0e6ae806f3
 
 
-- **Feature : save and display current location**
+- **Feature : save in MySQL and display location from the database**
 
 
 
