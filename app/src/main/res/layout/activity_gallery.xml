@@ -11,6 +11,7 @@
         android:layout_width="409dp"
         android:layout_height="729dp"
         android:orientation="vertical"
+        android:layout_marginTop="32dp"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
 
@@ -18,6 +19,7 @@
             android:id="@+id/btnFindPhoto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
             android:text="Rechercher une photo" />
 
         <ImageView
@@ -25,6 +27,46 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/gallery"
-        tools:srcCompat="@tools:sample/avatars" />
+            android:layout_marginTop="32dp"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <EditText
+            android:id="@+id/inputTexteTitre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ecrire le Titre"
+            android:layout_marginTop="32dp"
+            android:inputType="text" />
+
+        <Button
+            android:id="@+id/btnEnregistrerPhotoDansSqlite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Sauvegarder dans sqlite" />
+
+        <Button
+            android:id="@+id/btnLoadPhotosFromSqlite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="btnLoadPhotosFromSqlite" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textViewLoadedData"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Les données en chargement" />
+            </LinearLayout>
+        </ScrollView>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
