@@ -56,7 +56,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     // --- Database Configuration ---
     // WARNING: Hardcoding credentials is a security risk.
-    private static final String DB_URL = "jdbc:mysql://10.0.2.2:3306/MyDB"; // 10.0.2.2 is for Android Emulator to
+    private static final String DB_URL = "jdbc:mysql://10.0.2.2:3306/sampledb"; // 10.0.2.2 is for Android Emulator to
                                                                             // connect to host's localhost
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "test";
@@ -211,7 +211,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
                 Log.d(TAG_DB, "Connected!");
 
-                String sql = "INSERT INTO MyTable (latitude, longitude) VALUES (?, ?)";
+                String sql = "INSERT INTO location (latitude, longitude) VALUES (?, ?)";
                 statement = connection.prepareStatement(sql);
                 statement.setDouble(1, lat);
                 statement.setDouble(2, lon);
@@ -262,7 +262,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 // Assuming 'id' or a timestamp column can be used for ordering to get the
                 // "last"
                 // If you have an auto-increment ID:
-                String sql = "SELECT latitude, longitude FROM MyTable ORDER BY id DESC LIMIT 1";
+                String sql = "SELECT latitude, longitude FROM location";
                 // If you use a timestamp column e.g., 'saved_at':
                 // String sql = "SELECT latitude, longitude FROM MyTable ORDER BY saved_at DESC
                 // LIMIT 1";
