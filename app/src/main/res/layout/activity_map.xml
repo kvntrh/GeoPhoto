@@ -7,15 +7,42 @@
     android:layout_height="match_parent"
     tools:context=".MapActivity">
 
-
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-56dp" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button_controls_layout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
+    <LinearLayout
+        android:id="@+id/button_controls_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_toolbar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <Button
+            android:id="@+id/btnSaveLocation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Save Current Location"
+            android:layout_marginEnd="4dp"/>
+
+        <Button
+            android:id="@+id/btnDisplayLastLocation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Display Last Saved"
+            android:layout_marginStart="4dp"/>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/bottom_toolbar"
@@ -32,16 +59,22 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/latitude"
-            android:hint="@string/latitude" />
+            android:layout_gravity="center_vertical"
+            android:paddingStart="8dp"
+            android:textColor="@android:color/white"
+            android:hint="@string/latitude"
+            android:textColorHint="#CCCCCC"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/longitude"
-            android:hint="@string/longitude" />
+            android:layout_gravity="center_vertical"
+            android:paddingStart="8dp"
+            android:textColor="@android:color/white"
+            android:hint="@string/longitude"
+            android:textColorHint="#CCCCCC"/>
     </LinearLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
