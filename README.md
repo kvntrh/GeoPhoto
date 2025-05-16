@@ -17,6 +17,8 @@
 
 ## Features
 
+👉 If the GIF doesn't load, click on the link please.
+
 - **Bonus Feature : Find Photo From Gallery**
 
 https://github.com/user-attachments/assets/8f1cb838-7a2c-45cb-932c-fba2f127baf1
