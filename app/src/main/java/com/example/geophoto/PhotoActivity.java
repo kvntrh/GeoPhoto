@@ -125,8 +125,6 @@ public class PhotoActivity extends AppCompatActivity {
 
     private void prendreUnePhoto() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // Vérifie qu’il existe bien une app pour gérer cet intent
-        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         String time = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         File photoDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         try {
